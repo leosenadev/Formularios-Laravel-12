@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\FormularioContato;
 use Illuminate\Http\Request;
 
 class FormularioController extends Controller
@@ -19,7 +19,7 @@ class FormularioController extends Controller
      */
     public function create()
     {
-        //
+         return view('principal');
     }
 
     /**
@@ -27,7 +27,36 @@ class FormularioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       /*Salvando os dados 1 - MODEL
+            $formContato = new FormularioContato();
+            $formContato->nome           = $request->nome;
+            $formContato->telefone       = $request->telefone;
+            $formContato->email          = $request->email;
+            $formContato->motivo_contato = $request->motivo_contato;
+            $formContato->mensagem       = $request->mensagem;
+            $formContato->save();
+        */
+       
+       /*Salvando os dados massivo 2 - MODEL
+            $formContato = new FormularioContato();
+            $formContato->fill($request->all());
+        */
+        $request->validate([
+            'nome'=>'required|min:2|max:40|unique:contatos',
+            'telefone'=>'required|min:11|unique:contatos',
+            'email'=>'email|required|unique:contatos',
+            'motivo_contato'=>'required|min:1',
+            'mensagem'=>'required'
+        ]);
+        //dd($request->all());
+            $formContato = new FormularioContato();
+            $formContato->nome           = $request->nome;
+            $formContato->telefone       = $request->telefone;
+            $formContato->email          = $request->email;
+            $formContato->motivo_contato = $request->motivo_contato;
+            $formContato->mensagem       = $request->mensagem;
+            $formContato->save();
+       return redirect()->route('index')->with('sucesso','Formulário enviado com sucesso!');
     }
 
     /**

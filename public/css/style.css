@@ -74,6 +74,23 @@
     color: #636262;
 
 }
+.dv-row .dv-form .msg-form{
+    width: 100%;
+    padding:20px;
+    background: #bee1ba;
+    color:#528a4d;
+    border-radius: 5px;
+}
+.dv-row .dv-form .msg-form-error{
+    width: 100%;
+    padding:20px;
+    background: #e1baba;
+    color:#8a4d4d;
+    border-radius: 5px;
+}
+.dv-row .dv-form p{
+    text-align: center;
+}
 @media(max-width:500px){
     .dv-row h1{
         font-size:20px;
@@ -88,5 +105,8 @@
         font-weight:bold;
          font-size:small;
     
+    }
+    .dv-row{
+        width: 100%;
     }
 }

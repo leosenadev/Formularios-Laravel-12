@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class FormularioContato extends Model
 {
-    use HasFactory;
+    protected $table='contatos';
+    protected $fillable = ['nome','telefone','email','motivo_contato','mensagem'];
 }
