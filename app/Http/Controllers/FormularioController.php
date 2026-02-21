@@ -41,13 +41,23 @@ class FormularioController extends Controller
             $formContato = new FormularioContato();
             $formContato->fill($request->all());
         */
-        $request->validate([
-            'nome'=>'required|min:2|max:40|unique:contatos',
+         $regras= [
+            'nome'=>'required|min:3|max:40|unique:contatos',
             'telefone'=>'required|min:11|unique:contatos',
             'email'=>'email|required|unique:contatos',
             'motivo_contato'=>'required|min:1',
             'mensagem'=>'required'
-        ]);
+        ];
+        $feedback = [
+            'nome.min'=>'O campo nome precisa ter no mínimo 3 caracteres',
+            'nome.max'=>'O campo nome deve ter no máximo 40 caracteres',
+            'nome.unique'=>'O nome informado já está em uso',
+            'email.email'=>'O email informado não é válido',
+            'mensagem.max'=>'A mensagem deve ter no máximo 2000 caracteres',
+            'required'=>'O campo :attribute deve ser preenchido'
+        ];
+
+        $request->validate($regras,$feedback);
         //dd($request->all());
             $formContato = new FormularioContato();
             $formContato->nome           = $request->nome;
